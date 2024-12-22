@@ -83,11 +83,11 @@ insert into "COACH" (user_id, experience_years) values
     -- 1. 所有教練都有 `重訓` 專長
     -- 2. 教練`肌肉棒子` 需要有 `瑜伽` 專長
     -- 3. 教練`Q太郎` 需要有 `有氧運動` 與 `復健訓練` 專長
--- insert into "COACH_LINK_SKILL" (coach_id, skill_id) values 
--- (
---   (select id from "COACH" where user_id = (select id from "USER" where email = 'lee2000@hexschooltest.io')),
---   (select id from "SKILL" where name = '重訓')
--- );
+insert into "COACH_LINK_SKILL" (coach_id, skill_id) values 
+(
+  (select id from "COACH" where user_id = (select id from "USER" where email = 'lee2000@hexschooltest.io')),
+  (select id from "SKILL" where name = '重訓')
+);
 
 -- 3-3 修改：更新教練的經驗年數，資料需求如下：
     -- 1. 教練`肌肉棒子` 的經驗年數為3年
