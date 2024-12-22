@@ -83,24 +83,24 @@ insert into "COACH" (user_id, experience_years) values
     -- 1. 所有教練都有 `重訓` 專長
     -- 2. 教練`肌肉棒子` 需要有 `瑜伽` 專長
     -- 3. 教練`Q太郎` 需要有 `有氧運動` 與 `復健訓練` 專長
-insert into "COACH_LINK_SKILL" (coach_id, skill_id) values 
-(
-  (select id from "COACH" where user_id = (select id from "USER" where email = 'lee2000@hexschooltest.io')),
-  (select id from "SKILL" where name = '重訓')
-);
+-- insert into "COACH_LINK_SKILL" (coach_id, skill_id) values 
+-- (
+--   (select id from "COACH" where user_id = (select id from "USER" where email = 'lee2000@hexschooltest.io')),
+--   (select id from "SKILL" where name = '重訓')
+-- );
 
 -- 3-3 修改：更新教練的經驗年數，資料需求如下：
     -- 1. 教練`肌肉棒子` 的經驗年數為3年
     -- 2. 教練`Q太郎` 的經驗年數為5年
-update "COACH" 
-set experience_years = 5
-where user_id = (
-select id from "USER" where email = 'starplatinum@hexschooltest.io'
-);
+-- update "COACH" 
+-- set experience_years = 5
+-- where user_id = (
+-- select id from "USER" where email = 'starplatinum@hexschooltest.io'
+-- );
 
 -- 3-4 刪除：新增一個專長 空中瑜伽 至 SKILL 資料表，之後刪除此專長。
-insert into "SKILL" (name) values ('空中瑜伽');
-delete from "SKILL" where name = '空中瑜伽';
+-- insert into "SKILL" (name) values ('空中瑜伽');
+-- delete from "SKILL" where name = '空中瑜伽';
 
 --  ████████  █████   █    █   █ 
 --    █ █   ██    █  █     █   █ 
@@ -117,15 +117,15 @@ delete from "SKILL" where name = '空中瑜伽';
     -- 5. 授課結束時間`end_at`設定為2024-11-25 16:00:00
     -- 6. 最大授課人數`max_participants` 設定為10
     -- 7. 授課連結設定`meeting_url`為 https://test-meeting.test.io
-insert into "COURSE" (user_id, skill_id, name, start_at, end_at, max_participants, meeting_url)
-values((select id from "USER" where email = 'lee2000@hexschooltest.io'),
-(select id from "SKILL" where "name" = '重訓'),
-'重訓基礎課',
-'2024-11-25 14:00:00',
-'2024-11-25 16:00:00',
-10,
-'https://test-meeting.test.io'
-);
+-- insert into "COURSE" (user_id, skill_id, name, start_at, end_at, max_participants, meeting_url)
+-- values((select id from "USER" where email = 'lee2000@hexschooltest.io'),
+-- (select id from "SKILL" where "name" = '重訓'),
+-- '重訓基礎課',
+-- '2024-11-25 14:00:00',
+-- '2024-11-25 16:00:00',
+-- 10,
+-- 'https://test-meeting.test.io'
+-- );
 
 -- ████████  █████   █    █████ 
 --   █ █   ██    █  █     █     
