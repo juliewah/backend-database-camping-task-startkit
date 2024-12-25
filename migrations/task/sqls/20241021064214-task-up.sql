@@ -25,7 +25,7 @@ VALUES
 -- 1-2 修改：用 Email 找到 李燕容、肌肉棒子、Q太郎，如果他的 Role 為 USER 將他的 Role 改為 COACH
 UPDATE "USER"
 SET role = 'COACH'
-where email = 'starplatinum@hexschooltest.io';
+where email in ('starplatinum@hexschooltest.io', 'lee2000@hexschooltest.io', 'muscle@hexschooltest.io');
 
 -- 1-3 刪除：刪除USER 資料表中，用 Email 找到透明人，並刪除該筆資料
 delete from "USER"
@@ -60,10 +60,25 @@ values
     -- 2. `王小明` 購買 `21 堂組合包方案`
     -- 3. `好野人` 購買 `14 堂組合包方案`
 insert into "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid)
-values ((select id from "USER" where email = 'richman@hexschooltest.io'),
-(select id from "CREDIT_PACKAGE" where name = '14 堂組合包方案'),
-(select credit_amount from "CREDIT_PACKAGE" where name = '14 堂組合包方案'),
-(select price from "CREDIT_PACKAGE" where name = '14 堂組合包方案'));
+values
+(
+    (select id from "USER" where email = 'richman@hexschooltest.io'),
+    (select id from "CREDIT_PACKAGE" where name = '14 堂組合包方案'),
+    (select credit_amount from "CREDIT_PACKAGE" where name = '14 堂組合包方案'),
+    (select price from "CREDIT_PACKAGE" where name = '14 堂組合包方案')
+),
+(
+    (select id from "USER" where email = 'wXlTq@hexschooltest.io'),
+    (select id from "CREDIT_PACKAGE" where name = '14 堂組合包方案'),
+    (select credit_amount from "CREDIT_PACKAGE" where name = '14 堂組合包方案'),
+    (select price from "CREDIT_PACKAGE" where name = '14 堂組合包方案')
+),
+(
+    (select id from "USER" where email = 'wXlTq@hexschooltest.io'),
+    (select id from "CREDIT_PACKAGE" where name = '21 堂組合包方案'),
+    (select credit_amount from "CREDIT_PACKAGE" where name = '21 堂組合包方案'),
+    (select price from "CREDIT_PACKAGE" where name = '21 堂組合包方案')
+);
 
 -- ████████  █████   █    ████   
 --   █ █   ██    █  █         ██ 
@@ -85,9 +100,18 @@ insert into "COACH" (user_id, experience_years) values
     -- 1. 所有教練都有 `重訓` 專長
     -- 2. 教練`肌肉棒子` 需要有 `瑜伽` 專長
     -- 3. 教練`Q太郎` 需要有 `有氧運動` 與 `復健訓練` 專長
-insert into "COACH_LINK_SKILL" (coach_id, skill_id) values 
+insert into "COACH_LINK_SKILL" (coach_id, skill_id)
+values
 (
   (select id from "COACH" where user_id = (select id from "USER" where email = 'lee2000@hexschooltest.io')),
+  (select id from "SKILL" where name = '重訓')
+),
+(
+  (select id from "COACH" where user_id = (select id from "USER" where email = 'muscle@hexschooltest.io')),
+  (select id from "SKILL" where name = '重訓')
+),
+(
+  (select id from "COACH" where user_id = (select id from "USER" where email = 'starplatinum@hexschooltest.io')),
   (select id from "SKILL" where name = '重訓')
 ),
 (
